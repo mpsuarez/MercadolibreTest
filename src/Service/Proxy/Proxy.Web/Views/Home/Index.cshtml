@@ -1,0 +1,46 @@
+﻿@model IEnumerable<RequestDataTransfer>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Data
+            </th>
+            <th>
+                Value
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>
+                Total Request Number
+            </td>
+            <td>
+                @Model.Count()
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Total Request Succeeded
+            </td>
+            <td>
+                @Model.Where(x => x.Response.StatusCode < 300 && x.Response.StatusCode >= 200).Count()
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Total Request Failed
+            </td>
+            <td>
+                @Model.Where(x => x.Response.StatusCode < 600 && x.Response.StatusCode >= 400).Count()
+            </td>
+        </tr>
+
+    </tbody>
+</table>
